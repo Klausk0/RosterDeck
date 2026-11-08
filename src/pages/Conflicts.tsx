@@ -262,7 +262,9 @@ export default function Conflicts() {
       await loadData();
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Could not revalidate this roster.",
+        err instanceof Error
+          ? err.message
+          : "Could not revalidate this roster.",
       );
     } finally {
       setRevalidating(false);
@@ -307,14 +309,27 @@ export default function Conflicts() {
           </p>
         </div>
 
-        <button
-          className="secondary-button"
-          onClick={() => void loadData()}
-          disabled={loading}
-        >
-          <RefreshCw size={16} />
-          Refresh
-        </button>
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          {roster && roster.status !== "published" && (
+            <button
+              className="secondary-button"
+              onClick={() => void handleRevalidate()}
+              disabled={loading || revalidating}
+            >
+              <RefreshCw size={16} />
+              {revalidating ? "Revalidating..." : "Revalidate draft"}
+            </button>
+          )}
+
+          <button
+            className="secondary-button"
+            onClick={() => void loadData()}
+            disabled={loading || revalidating}
+          >
+            <RefreshCw size={16} />
+            Refresh
+          </button>
+        </div>
       </div>
 
       <div className="management-toolbar">

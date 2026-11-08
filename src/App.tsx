@@ -132,24 +132,6 @@ function Header() {
   );
 }
 
-function StatCard({
-  title,
-  value,
-  subtitle,
-}: {
-  title: string;
-  value: string;
-  subtitle: string;
-}) {
-  return (
-    <div className="stat-card">
-      <span className="stat-title">{title}</span>
-      <strong className="stat-value">{value}</strong>
-      <span className="stat-subtitle">{subtitle}</span>
-    </div>
-  );
-}
-
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -522,7 +504,7 @@ function Dashboard() {
           </div>
 
           <div className="checklist">
-            {setupItems.map((item, index) => (
+            {setupItems.map((item) => (
               <div className="check-item" key={item.label}>
                 <span className={`check-number ${item.complete ? "done" : ""}`}>
                   {item.complete ? (
@@ -597,18 +579,6 @@ function Dashboard() {
         </div>
       </section>
     </>
-  );
-}
-
-function PlaceholderPage({ title }: { title: string }) {
-  return (
-    <div className="page-heading">
-      <div>
-        <span className="eyebrow">WORKSPACE</span>
-        <h1>{title}</h1>
-        <p>This section will be implemented in the next stages.</p>
-      </div>
-    </div>
   );
 }
 

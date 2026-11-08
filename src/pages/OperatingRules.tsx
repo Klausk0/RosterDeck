@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, type FormEvent } from "react";
-import { Plus, Pencil, Trash2, RefreshCw, CalendarDays } from "lucide-react";
+import { Pencil, Trash2, RefreshCw, CalendarDays } from "lucide-react";
 import { supabase } from "../lib/supabase";
 
 type Brand = {
