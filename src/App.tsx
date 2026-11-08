@@ -1,7 +1,5 @@
 import Employees from "./pages/Employees";
 import Pods from "./pages/Pods";
-import Login from "./pages/Login.tsx";
-import { useAuth } from "./lib/AuthContext";
 import Brands from "./pages/Brands";
 import Availability from "./pages/Availability";
 import Roster from "./pages/Roster";
@@ -18,6 +16,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+
 import {
   LayoutDashboard,
   Users,
@@ -37,6 +36,7 @@ import {
   Circle,
   RefreshCw,
 } from "lucide-react";
+
 import "./App.css";
 
 const navigation = [
@@ -93,6 +93,7 @@ function Sidebar() {
           </NavLink>
         ))}
       </div>
+
       <div className="sidebar-bottom">
         <NavLink to="/settings" className="nav-link">
           <Settings size={18} />
@@ -154,6 +155,7 @@ function Dashboard() {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   const today = new Date();
+
   const currentMonth = `${today.getFullYear()}-${String(
     today.getMonth() + 1,
   ).padStart(2, "0")}`;
@@ -195,7 +197,10 @@ function Dashboard() {
             .select("*", { count: "exact", head: true })
             .eq("is_active", true),
 
-          supabase.from("pods").select("*", { count: "exact", head: true }),
+          supabase.from("pods").select("*", {
+            count: "exact",
+            head: true,
+          }),
 
           supabase
             .from("brand_processes")
@@ -280,6 +285,7 @@ function Dashboard() {
         setLastUpdated(new Date());
       } catch (err) {
         console.error("Dashboard loading error:", err);
+
         setError(
           err instanceof Error ? err.message : "Unable to load dashboard data.",
         );
@@ -583,16 +589,6 @@ function Dashboard() {
 }
 
 function App() {
-  const { session, loading, signOut } = useAuth();
-
-  if (loading) {
-    return <div style={{ padding: 40 }}>Loading RosterDesk...</div>;
-  }
-
-  if (!session) {
-    return <Login />;
-  }
-
   return (
     <div className="app-layout">
       <Sidebar />
@@ -614,10 +610,6 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
-
-        <button className="sign-out-button" onClick={() => void signOut()}>
-          Sign out
-        </button>
       </main>
     </div>
   );
