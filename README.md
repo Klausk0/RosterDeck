@@ -10,6 +10,7 @@ A web-based application for managing employee schedules, brand assignments and m
 ---
 
 ## About the Project
+<img width="947" height="443" alt="image" src="https://github.com/user-attachments/assets/63061d1a-4092-4282-944b-637d01ef5ffc" />
 
 RosterDesk is a roster management application built to address the scheduling challenges faced by operations teams working across multiple brands and processes.
 
